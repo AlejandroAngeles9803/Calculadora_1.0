@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora</title>
+  <link rel="stylesheet" type="text/css" th:href="@{..    /static/css/style.css}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<nav class="nav-wrap">
+  <div>
+    <a class="navbar-brand" href="#">Calculadora</a>
+  </div>
+
+  <div class="wrap-toggle">
+    <input type="checkbox" id="toggle" class="offscreen">
+    <label for="toggle" class="switch"></label>
+
+  </div>
+
+</nav>
+
+<div class="container">
+  <h1 class="my-5 text-center">Calculadora</h1>
+
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <form method="post" th:action="@{/calcular}">
+        <div class="form-group">
+          <label for="numero">Número</label>
+          <input type="text" class="form-control" id="numero" name="numero" th:value="${numero}">
+        </div>
+        <button type="submit" class="btn btn-primary mr-2">Agregar</button>
+
+      </form>
+      <form method="post" th:action="@{/calcular}">
+        <div class="row mb-3 mt-5">
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-secondary btn-block"  formaction="/calcular?numero= 1">1</button>
+          </div>
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-secondary btn-block "  formaction="/calcular?numero=2">2</button>
+          </div>
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-secondary btn-block " formaction="/calcular?numero=3">3</button>
+          </div>
+        </div>
+        <div class="row mb-3 mt-5">
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-secondary btn-block"  formaction="/calcular?numero= 4">4</button>
+          </div>
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-secondary btn-block "  formaction="/calcular?numero=5">5</button>
+          </div>
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-secondary btn-block " formaction="/calcular?numero=6">6</button>
+          </div>
+        </div>
+        <div class="row mb-3 mt-5">
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-secondary btn-block"  formaction="/calcular?numero= 7">7</button>
+          </div>
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-secondary btn-block "  formaction="/calcular?numero=8">8</button>
+          </div>
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-secondary btn-block " formaction="/calcular?numero=9">9</button>
+          </div>
+        </div>
+        <div class="row mb-3 mt-5">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-secondary btn-block"  formaction="/calcular?numero= 0">0</button>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">Operaciones</h3>
+
+          <form method="post" th:action="@{/operacion}">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <button type="submit" class="btn btn-secondary btn-block" formaction="/operacion?op=suma">+</button>
+              </div>
+              <div class="col-md-6">
+                <button type="submit" class="btn btn-secondary btn-block" formaction="/operacion?op=-">-</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <button type="submit" class="btn btn-secondary btn-block" formaction="/operacion?op=*">*</button>
+              </div>
+              <div class="col-md-6">
+                <button type="submit" class="btn btn-secondary btn-block" formaction="/operacion?op=/">/</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">Resultados</h3>
+
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Número</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="numero, i : ${numeros}">
+              <th th:text="${i.index + 1}"></th>
+              <td th:text="${numero}"></td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="text-center mt-4">
+            <h5 class="font-weight-bold mb-3" th:if="${!numeros.isEmpty()}">Operación: <span th:text="${operacion}"></span></h5>
+            <h5 class="font-weight-bold mb-3" th:if="${resultado != null}">Resultado: <span th:text="${resultado}"></span></h5>
+
+          </div>
+
+          <form method="post" th:action="@{/limpiar}">
+            <button type="submit" class="btn btn-danger btn-block">Limpiar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  .nav-wrap{
+    display: flex;
+    height: 100px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  nav{
+    background-color: greenyellow;
+  }
+
+
+  .wrap-toggle{
+    padding: 5rem;
+
+  }
+
+  .switch{
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    background-color: plum;
+    border-radius: 20px ;
+    cursor: pointer;
+
+  }
+
+  .switch::after{
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 20px;
+    background-color: white;
+    left: 5px;
+    top: 5px;
+    transition: all 0.4s;
+  }
+
+  input[type='checkbox']:checked + .switch::after{
+    transform: translateX(20px);
+    background-color: brown;
+  }
+
+  input[type='checkbox']:checked + .switch{
+    background-color: aqua;
+  }
+
+  .offscreen{
+    position:absolute;
+    left: -99999999999px;
+  }
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-EVv1rLl1/oFfsyUBcVRP8oYzR0nt+L5Bl5ZfzwG8xpS5swS4NQjep6yHp+x3zOf4"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-QOqnU6YdWFEZoLtvxT0RpvmNpjsqmz/1xt13YYX0oH2Qq3+h/6cQwqi7VRUJKDJm"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
