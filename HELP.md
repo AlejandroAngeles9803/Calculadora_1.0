@@ -1,8 +1,3 @@
-# Read Me First
-The following was discovered as part of building this project:
-
-* The original package name 'com.example.Calculadora_1.0' is invalid and this project uses 'com.example.Calculadora_10' instead.
-
 # Getting Started
 
 ### Reference Documentation

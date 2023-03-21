@@ -9,12 +9,12 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>Calculadora_1.0</artifactId>
+	<artifactId>Calculadora_Final</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Calculadora_1.0</name>
+	<name>Calculadora_Final</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>19</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
