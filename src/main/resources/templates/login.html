@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Login</title>
+</head>
+<body>
+
+<form th:action="@{/login}" th:object="${user}" method="post">
+  <div class="general">
+    <h1>Bievenido</h1>
+    <img src="\images\Logo.svg"alt="logo">
+    <div class="user-container">
+      <label class="opc">Email:</label>
+      <input class="input" th:field="*{email}" type="email"/>
+
+    </div>
+    <span class="error" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></span>
+    <div class="password-container">
+      <label class="opc">Password:</label>
+      <input  class="input"  th:field="*{password}" type="password"/>
+      <span th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></span>
+    </div>
+    <button class="entrar" type="submit">ENTRAR</button>
+  </div>
+</form>
+
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  body{
+    background-color: #33CCFF;
+  }
+
+  .general{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .general h1{
+    font-size: 100px;
+  }
+
+  .user-container{
+    padding-top: 3rem;
+    font-size: xxx-large;
+  }
+
+  .input{
+    border-radius: 20px;
+    width: 350px;
+    height: 54px;
+    background-color: #CCFF99;
+  }
+
+  .password-container{
+    padding-top: 3rem;
+    font-size: xxx-large;
+    padding-bottom: 3rem;
+  }
+
+  .entrar{
+    height: 62px;
+    width: 229px;
+    border-radius: 20px;
+    background-color: #CCFF99;
+    color: black;
+    font-size: medium;
+  }
+
+  .error{
+    background-color: red;
+  }
+</style>
+</body>
+</html>
